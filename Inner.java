@@ -16,6 +16,7 @@ public class Inner {
                 System.out.println("THis is showing from the anonmous function.inner to the Demo class");
             }
         };
+        //we can also use innerclasses to define  abstract methods in an abstract class.
         obj.show();//THis is showing from the anonmous function.inner to the Demo class
         //A.B obj1=obj.new B();
         //or this way if the inner class is static.(initializers static can only be added in inner classes )
