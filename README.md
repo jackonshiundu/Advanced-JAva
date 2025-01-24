@@ -137,3 +137,88 @@ This example illustrates how to work with interfaces in Java, including:
     Implementing interfaces in a class.
     Inheriting one interface from another.
     Using multiple interfaces in a class.
+
+# Enun.java
+
+This project demonstrates how to use enums in Java to represent a set of constant values. In this case, we use the Laptop enum to represent different laptop models, each with a specific price. The file includes various methods for interacting with the enum values, including values(), ordinal(), conditional checks using if-else, and switch.
+
+Project Structure
+The project contains two main components:
+
+Laptop Enum:
+
+Represents laptop models (ThinkPad, Hp, Macbook, and Surface).
+Each laptop model has an associated price, with a default price for some models.
+Includes a constructor to set custom prices and a method to get or modify the price.
+Enum Class:
+
+Demonstrates how to use the Laptop enum in different scenarios.
+Includes examples of how to:
+Loop through enum constants using values().
+Use ordinal() to get the position of enum constants.
+Compare enum values using if-else.
+Use a switch statement to handle enum constants.
+Enum Details: Laptop
+The Laptop enum defines the following constants:
+
+ThinkPad(3000): Price set to 3000.
+Hp(2000): Price set to 2000.
+Macbook(5000): Price set to 5000.
+Surface: Default price set to 6000.
+Fields and Methods:
+price: Integer field holding the price for each laptop model.
+Laptop(): Default constructor that sets the price to 6000 (used for Surface).
+Laptop(int price): Constructor that allows setting a custom price for each laptop.
+getPrice(): Method to return the price of the laptop.
+setPrice(int price): Method to modify the price of the laptop.
+Example Use Cases:
+
+1.  Using values() to Retrieve All Enum Constants
+    The values() method is automatically generated for all enums. It returns an array of all constants in the order they are defined.
+
+    Laptop[] res = Laptop.values();
+    for (Laptop re : res) {
+    System.out.println(re.ordinal() + " :" + re + " : " + re.getPrice());
+    }
+    This code prints the ordinal value (index), name, and price of each laptop.
+
+2.  Using if-else to Compare Enum Values
+    This example checks the value of the Laptop variable and prints the price of the corresponding laptop.
+
+    Laptop r = Laptop.Hp;
+    if (r == Laptop.Hp) {
+    System.out.println(r + " " + r.getPrice());
+    } else if (r == Laptop.Macbook) {
+    System.out.println(r + " " + r.getPrice());
+    } else {
+    System.out.println("Others");
+    }
+
+3.  Using switch to Compare Enum Values
+    The switch statement offers a more concise way to compare enum constants.
+
+        switch (r) {
+            case Macbook:
+                System.out.println(r + " " + r.getPrice());
+                break;
+            case Hp:
+                System.out.println(r + " " + r.getPrice());
+                break;
+            default:
+                System.out.println("Others");
+                break;
+        }
+
+    Expected Output:
+    When the main() method is executed, the program produces the following output:
+
+        0 :ThinkPad : 3000
+        1 :Hp : 2000
+        2 :Macbook : 5000
+        3 :Surface : 6000
+        Hp 2000
+        Hp 2000
+
+        The first block prints the ordinal value (position in the enum declaration), laptop name, and its price.
+        The second block uses if-else to print the price of Hp (since r is set to Laptop.Hp).
+        The third block uses a switch statement to again print the price of Hp.
