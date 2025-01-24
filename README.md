@@ -80,3 +80,60 @@ A static inner class is associated with the outer class and can be instantiated 
 
 Conclusion
 This example demonstrates basic usage of anonymous and static inner classes in Java. The anonymous inner class is used to override a method of class A without creating a named subclass, while the static inner class B is instantiated separately, demonstrating the flexibility of inner class usage in Java.
+
+# Interface.java
+
+This project demonstrates how to define and implement interfaces in Java. It covers the following key concepts:
+
+Interface Definition: How to define an interface and declare methods in it.
+Implementing Interfaces: How a class can implement one or more interfaces.
+Interface Inheritance: How an interface can extend another interface.
+Multiple Interface Implementation: A class implementing multiple interfaces.
+The code also illustrates the use of constants in interfaces and how methods from interfaces are implemented in a class.
+
+Code Explanation
+Interface X
+Variables in Interface: The interface X defines two variables, age and area, which are implicitly public, static, and final. This means their values cannot be changed once initialized.
+Methods: The interface declares two abstract methods, show() and config(), which must be implemented by any class that implements X.
+Interface Y
+Method Declaration: The interface Y defines a single abstract method run().
+Interface Z: The interface Z extends interface Y, meaning any class that implements Z must also implement the run() method from interface Y.
+Class B
+Implementing Multiple Interfaces: The class B implements both X and Z. This means it must implement all methods from both interfaces:
+show() and config() from X.
+run() from Y, which is inherited by Z.
+Main Method (Interface Class)
+Object Creation:
+An object obj of type X is created and assigned an instance of B. The show() method from interface X is called on obj.
+An object obj1 of type Y is created and assigned an instance of B. The run() method from interface Y is called on obj1.
+Accessing Interface Constants: The constant area from interface X is accessed using X.area.
+Output:
+
+Showing in class B implementing A interface
+The Dog is running from B
+Nairobi
+
+Key Concepts
+
+Interface in Java
+An interface in Java is a reference type, similar to a class, that can contain only constants, method signatures, default methods, static methods, and nested types. It cannot contain instance fields or constructors.
+
+    Methods in Interface: All methods declared in an interface are implicitly public and abstract, unless they are default or static methods.
+    Variables in Interface: All variables in an interface are implicitly public, static, and final.
+
+Implementing an Interface
+When a class implements an interface, it is required to provide concrete implementations for all the abstract methods declared in the interface.
+
+Interface Inheritance
+An interface can extend one or more other interfaces, inheriting their method declarations.
+
+Multiple Interface Implementation
+A class can implement multiple interfaces, providing implementations for all methods from each interface.
+
+Conclusion
+This example illustrates how to work with interfaces in Java, including:
+
+    Defining interfaces with methods and constants.
+    Implementing interfaces in a class.
+    Inheriting one interface from another.
+    Using multiple interfaces in a class.
