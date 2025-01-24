@@ -1,0 +1,119 @@
+What are Annotations in Java?
+Annotations in Java are a form of metadata that provide data about a program, but they do not affect the program's behavior directly. They are used to add additional information to the code, which can then be processed at compile time, runtime, or during code generation.
+
+You can think of annotations as special markers that can be added to classes, methods, fields, or even parameters to provide further context or instructions to the compiler, runtime environment, or other tools.
+
+Why Are Annotations Useful?
+Annotations are used for a variety of purposes:
+
+Compiler Instructions: They can instruct the compiler to perform certain actions (like suppressing warnings).
+Code Generation: Tools like Lombok, Jackson, and JUnit rely on annotations to generate code or perform specific actions.
+Documentation: They help document certain aspects of your code (like @Override or @Deprecated).
+Framework Configuration: In frameworks like Spring or Hibernate, annotations are used for configuration and defining behaviors.
+Common Annotations in Java
+Here are some commonly used annotations in Java:
+
+@Override:
+
+Indicates that a method is overriding a method in its superclass.
+Purpose: To prevent errors when overriding methods.
+
+@Override
+public String toString() {
+    return "Hello";
+}
+@Deprecated:
+
+Marks a method, class, or field as deprecated (i.e., it is no longer recommended for use).
+Purpose: To warn developers that the element will be removed in the future.
+
+@Deprecated
+public void oldMethod() {
+    // some code
+}
+@SuppressWarnings:
+
+Tells the compiler to suppress specific warnings.
+Purpose: Useful when you want to ignore certain warnings in the code (e.g., unchecked cast warnings).
+
+@SuppressWarnings("unchecked")
+public void someMethod() {
+    // code here
+}
+@FunctionalInterface:
+
+Used to indicate that an interface is intended to be a functional interface (i.e., an interface with a single abstract method).
+Purpose: Helps the compiler to check that the interface has exactly one abstract method, which is a requirement for functional interfaces.
+
+@FunctionalInterface
+public interface MyFunctionalInterface {
+    void myMethod();
+}
+@Entity, @Table, @Id (Hibernate):
+
+Used in Java Persistence API (JPA) for mapping Java objects to database tables.
+Purpose: It allows frameworks like Hibernate to map classes to database tables.
+
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    private Long id;
+    private String name;
+}
+Custom Annotations
+You can also create your own custom annotations in Java using the @interface keyword. Here's an example:
+
+
+@interface MyAnnotation {
+    String description() default "No description";
+    int value() default 0;
+}
+You can then apply your custom annotation to methods, classes, or fields:
+
+
+@MyAnnotation(description = "This is a custom annotation", value = 42)
+public class MyClass {
+    // Class code
+}
+How Annotations Work
+Annotations can be processed by:
+
+The compiler: Some annotations are used during compilation (e.g., @Override and @Deprecated).
+Reflection: Annotations can be read at runtime using reflection. This allows frameworks to inspect classes, methods, or fields annotated with certain annotations.
+Annotation Processing Tools (APT): Java includes an annotation processing tool that can process custom annotations during compilation and generate additional code.
+Accessing Annotations via Reflection
+You can use reflection to access annotations at runtime:
+
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+
+public class TestAnnotation {
+    public static void main(String[] args) throws Exception {
+        Method method = MyClass.class.getMethod("myMethod");
+
+        if (method.isAnnotationPresent(MyAnnotation.class)) {
+            MyAnnotation annotation = method.getAnnotation(MyAnnotation.class);
+            System.out.println("Description: " + annotation.description());
+            System.out.println("Value: " + annotation.value());
+        }
+    }
+}
+
+class MyClass {
+    @MyAnnotation(description = "Test Method", value = 10)
+    public void myMethod() {
+        // Method code
+    }
+}
+Retention Policies
+Annotations have a retention policy that defines whether the annotation is available at runtime, compile time, or source code time. The most common retention policies are:
+
+@Retention(RetentionPolicy.SOURCE): The annotation is discarded by the compiler and is not available at runtime.
+@Retention(RetentionPolicy.CLASS): The annotation is available at compile time but not at runtime (default for most annotations).
+@Retention(RetentionPolicy.RUNTIME): The annotation is available at runtime (allows reflection).
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MyAnnotation {
+    String value();
