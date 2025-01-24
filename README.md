@@ -51,3 +51,32 @@ Sample Output:
 Playing Music...
 You are now driving ford Ranger Raptor ...
 You are Flying Tesla....
+
+# Inner.java
+
+This project demonstrates the usage of anonymous inner classes and static inner classes in Java. The program defines a class A with a non-static inner class B, and also illustrates how to override methods using an anonymous inner class. The example also highlights how static inner classes can be instantiated without needing an instance of the outer class.
+
+Code Explanation
+Class A
+Method show(): A method that prints a message to the console.
+Static inner class B: This is a static inner class inside class A. It contains a method show1() that prints a different message to the console. Static inner classes can be instantiated without requiring an instance of the outer class.
+Class Inner (Main Class)
+Anonymous Inner Class: Inside the main method, an anonymous class is created by extending class A and overriding its show() method. The overridden method prints a custom message.
+Static Inner Class Instantiation: The static inner class B is instantiated using new A.B(), which does not require an instance of the outer class A. Then, the show1() method of B is called to print another message.
+Code Flow
+The anonymous inner class overrides the show() method of class A, and when obj.show() is called, it prints the overridden message.
+The static inner class B is instantiated using new A.B(), and the method show1() prints its message.
+Output
+
+THis is showing from the anonmous function.inner to the Demo class
+Hello this is show in A.B.
+
+Key Concepts
+Anonymous Inner Class
+An anonymous inner class is used to create a class that implements or extends an existing class (or interface) without explicitly naming it. It can be used when you need to override methods of a class or interface in a concise way.
+
+Static Inner Class
+A static inner class is associated with the outer class and can be instantiated without an instance of the outer class. It can access only the static members of the outer class.
+
+Conclusion
+This example demonstrates basic usage of anonymous and static inner classes in Java. The anonymous inner class is used to override a method of class A without creating a named subclass, while the static inner class B is instantiated separately, demonstrating the flexibility of inner class usage in Java.
