@@ -6,7 +6,7 @@
     //you can also create variables in an interface but they are both final and static. So you have to initialize.
     int age=44;
     String area="Nairobi";
-    //by default interface methods have the oublic abstract applied in the background if you dont explicitly spacify
+    //by default interface methods have the public abstract applied in the background if you dont explicitly spacify
     void show();
     void config();
 }
@@ -32,6 +32,19 @@ class B implements X,Z{
         System.out.println("The Dog iss running from B");
     }
 }
+//diffrent types of interface
+//Normal-Two  methods
+//Functional.SAM- single method
+//Marker INterface no method
+@FunctionalInterface //annotaion to make this interface a Functional Interface.
+interface SamI {
+    void show();
+}
+class SamIImp implements SamI {
+    public void show(){
+        System.out.println("Implimenting the SAM Interface in CLass SamIimp.");
+    }
+}
 public class Interface {
     public static void main(String[] args) {
         X obj;
@@ -44,6 +57,10 @@ public class Interface {
         obj1.run();
         //now abouve line i cannot in any way call methods of interface X.
         System.out.println(X.area);
+        //implimentation of SAM interface
+        SamI obj2=new SamIImp();
+
+        obj2.show();
     }
 }
 

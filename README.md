@@ -107,11 +107,18 @@ Object Creation:
 An object obj of type X is created and assigned an instance of B. The show() method from interface X is called on obj.
 An object obj1 of type Y is created and assigned an instance of B. The run() method from interface Y is called on obj1.
 Accessing Interface Constants: The constant area from interface X is accessed using X.area.
+
+on line 30 We look at diffrent types of interfaces that are tehre in JAVA and we go on to loook at an example of a Functional interface, it pretty much works the same as a Normal interface is just that it only has to have one abstarct method. whitch in our case is the show() method.
+
+when you continue further to line 60 you will see the creation of object and after calling
+obj2.show();//expected output will be - Implimenting the SAM Interface in CLass SamIimp.
+
 Output:
 
 Showing in class B implementing A interface
 The Dog is running from B
 Nairobi
+Implimenting the SAM Interface in CLass SamIimp.
 
 Key Concepts
 
