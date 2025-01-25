@@ -229,3 +229,35 @@ Example Use Cases:
         The first block prints the ordinal value (position in the enum declaration), laptop name, and its price.
         The second block uses if-else to print the price of Hp (since r is set to Laptop.Hp).
         The third block uses a switch statement to again print the price of Hp.
+
+# Lambda.java
+
+This Java program demonstrates the use of lambda expressions in conjunction with functional interfaces. In Java, lambda expressions provide a way to implement methods defined in functional interfaces in a more concise and readable way.
+
+Code Explanation
+
+1. Functional Interface
+
+   @FunctionalInterface
+   interface A {
+   void show(int i);
+   }
+   @FunctionalInterface is an annotation that ensures the interface has exactly one abstract method.
+   interface A defines a method show(int i), which takes an integer and returns no result (void).
+
+2. Lambda Expression
+
+   A obj = i -> System.out.println("This is showing implementing the interface A" + i);
+   A lambda expression is created by implementing the method of interface A.
+   The parameter i is passed in the lambda expression and is used to print a message that includes the value of i.
+   The arrow (->) separates the input parameter from the method body (the expression that follows).
+
+3. Using the Lambda Expression
+   obj.show(5);
+   The show method is called on the obj instance, passing the integer 5 as an argument.
+   The lambda expression inside the obj will execute and print: "This is showing implementing the interface A5".
+
+This is showing implementing the interface A5
+
+Conclusion
+This program demonstrates the power of lambda expressions in Java, making the code more compact and expressive, especially when working with functional interfaces. Instead of creating separate classes to implement interfaces, you can directly pass the behavior (method implementation) as a lambda expression.
