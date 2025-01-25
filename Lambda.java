@@ -1,4 +1,5 @@
-
+//in this code i am showing  lambda Functions and for as to make or create lambda funstion we must create function expression thats why.
+@FunctionalInterface
 interface A {
     void show(int i);
 }
