@@ -261,3 +261,55 @@ This is showing implementing the interface A5
 
 Conclusion
 This program demonstrates the power of lambda expressions in Java, making the code more compact and expressive, especially when working with functional interfaces. Instead of creating separate classes to implement interfaces, you can directly pass the behavior (method implementation) as a lambda expression.
+
+# Exceptions.java
+
+This Java program demonstrates the use of exception handling, custom exceptions, and different ways to handle errors using try, catch, and throw keywords. The program includes:
+
+ArithmeticException handling
+ArrayIndexOutOfBoundsException handling
+Custom exception (JackonException)
+Proper exception chaining and hierarchy
+Features
+Custom Exception: The program defines a custom exception (JackonException) to handle a specific scenario where division by 1 is attempted.
+Multiple Catch Blocks: Different types of exceptions (Arithmetic, ArrayIndexOutOfBounds, and general exceptions) are caught separately using different catch blocks.
+Exception Chaining: The parent exception (Exception) is caught last in the catch block hierarchy to catch any other unforeseen errors.
+Flow Control: Demonstrates how the execution stops inside the try block once an error occurs, and the corresponding catch block is executed.
+Code Explanation
+JackonException Class
+This is a custom exception that extends the built-in Exception class. It takes a message string and passes it to the parent constructor to display when the exception is thrown.
+
+class JackonException extends Exception {
+public JackonException(String str) {
+super(str);
+}
+}
+Main Program Logic
+Variable Initialization:
+
+i = 1 and j = 0: Initialize variables for division.
+nums[] = new int[5]: Initializes an array of size 5.
+Try Block:
+
+Arithmetic Operation: The code attempts to divide 18 by i. Since i = 1, no exception occurs here.
+Array Access: The code tries to access the 6th element in the array (nums[5]), which is out of bounds and throws an ArrayIndexOutOfBoundsException.
+Custom Exception: The program checks if i == 1 and throws the custom exception JackonException with a specific message.
+Catch Blocks:
+
+ArithmeticException: Catches division errors, such as dividing by zero.
+JackonException: Catches the custom exception thrown when i == 1.
+ArrayIndexOutOfBoundsException: Catches errors when trying to access elements outside the array bounds.
+Generic Exception: Catches any other errors not handled by the specific exceptions.
+Execution Flow:
+
+After an exception is caught, the program continues with the next statement outside the try-catch block, printing the value of j and a final statement "Last Statement".
+Example Output
+If i = 1 and the exception occurs, the output might look like this:
+
+Sorry!, The array you are trying to access is out of Bound.
+Please please lets not work with Division with one because you know the output
+0
+Last Statement.
+
+Conclusion
+This program demonstrates important concepts in Java exception handling, including handling different types of exceptions, creating custom exceptions, and using multiple catch blocks for specific error handling. Exception chaining and flow control are crucial to prevent the program from crashing unexpectedly.
