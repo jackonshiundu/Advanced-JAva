@@ -1,6 +1,13 @@
+//creating a custom Exception.
+class JackonException extends Exception{
+    public JackonException(String str){
+        //oassing the message to the parent constructor to print it.
+        super(str);
+    }
+}
 public class Exceptions {
     public static void main(String[] args) {
-        int i=0;
+        int i=1;
         int j=0;
         //try catch block is a way of catching exceptions in java and  teh code int the try block wont run unless there is no isssue with the code otherwise if there is an error in  the code the the code in the catch blog will be executed ,
         //no matter the situation the code outside the try catch block will alsways be executed;
@@ -10,11 +17,21 @@ public class Exceptions {
             j=18/i;
             //trying  to access this will thro an ArrayOutOfBoundException and we catch it that way
             System.out.println(nums[5]);
+            //you can also throw errors or basically jumping to teh catch block by throwing an error.
+            if(i==1){
+                //Implimenting Custom Exceptions.
+                throw new JackonException("Please please lets not work with Division with one beacause you know the output");
+            }
         }
         //this catch block as it is there are diffrent ways you can Catch multiple blog one is using if statement and then otehr one is using multiple catch blocks and this is how you use it.
         catch (ArithmeticException e) {
             // TODO: handle exception
             System.out.println("Cannot Devide a number by Zero.");
+
+        }
+        catch (JackonException e) {
+            // TODO: handle exception
+            System.out.println(e);
 
         }
         catch(ArrayIndexOutOfBoundsException e){
