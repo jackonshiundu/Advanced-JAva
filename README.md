@@ -313,3 +313,60 @@ Last Statement.
 
 Conclusion
 This program demonstrates important concepts in Java exception handling, including handling different types of exceptions, creating custom exceptions, and using multiple catch blocks for specific error handling. Exception chaining and flow control are crucial to prevent the program from crashing unexpectedly.
+
+# DuckingExpresiionsUsingThrows.java
+
+This example demonstrates how exceptions can be thrown from a method and handled by the calling code using the throws keyword. Specifically, it showcases how a method can "duck" the responsibility of handling an exception to the caller. In this case, a ClassNotFoundException is thrown and then handled in the main method.
+
+Code Explanation
+In this code, we have two classes:
+
+Class A: This class has a method show() that attempts to load a class named Calc using Class.forName("Calc"). However, since the Calc class does not exist, this will throw a ClassNotFoundException. Instead of handling the exception directly, A.show() declares that it throws this exception using the throws keyword. This means that it's up to the calling code (in this case, the main method) to handle the exception.
+
+public void show() throws ClassNotFoundException {
+Class.forName("Calc"); // This will throw ClassNotFoundException if the class doesn't exist
+}
+Main Class (DucklingExpressionsUsingThrows): In the main method, we create an object of class A and call obj.show(). Since show() declares that it throws a ClassNotFoundException, the exception must be handled in a try-catch block. Here, the exception is caught and e.printStackTrace() is called to print the stack trace of the exception.
+
+try {
+obj.show(); // Calls A.show(), which may throw ClassNotFoundException
+} catch (ClassNotFoundException e) {
+e.printStackTrace(); // Prints the stack trace of the exception for debugging
+}
+What Does Class.forName("Calc") Do?
+The Class.forName(String className) method in Java is used to dynamically load a class by its name during runtime. In the given example, Class.forName("Calc") tries to load a class named Calc. However, since the Calc class is not present in the project or classpath, this call throws a ClassNotFoundException.
+
+This method is commonly used when you need to load a class based on its name, for example, in JDBC to dynamically load database drivers or in frameworks that work with reflection.
+
+Expected Output and Explanation
+When the code runs, it will output something like this:
+
+java.lang.ClassNotFoundException: Calc
+at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+at java.base/java.lang.Class.forName0(Native Method)
+at java.base/java.lang.Class.forName(Class.java:421)
+at java.base/java.lang.Class.forName(Class.java:412)
+at A.show(DuckingExpresiionsUsingThrows.java:16)
+at DuckingExpresiionsUsingThrows.main(DuckingExpresiionsUsingThrows.java:24)
+
+Here’s what’s happening:
+
+The exception ClassNotFoundException is thrown when Class.forName("Calc") tries to load the class Calc, but it doesn't exist.
+The main method catches the exception and calls e.printStackTrace(), which prints the stack trace of the exception to the console.
+The stack trace shows the sequence of method calls that led to the exception. In this case, it shows:
+The exception occurred at Class.forName("Calc") inside the show method of class A.
+Then, it shows that show() was called from the main method of the DuckingExpresiionsUsingThrows class.
+This stack trace is incredibly helpful for debugging because it tells you where the error occurred and the path that led to it.
+
+Key Concepts:
+throws Keyword: This keyword is used in a method declaration to specify that the method can throw exceptions. In this case, the show() method declares that it throws ClassNotFoundException, passing the responsibility of handling it to the caller.
+
+Exception Propagation: Instead of handling an exception inside the show() method, it's propagated to the calling code (the main method) for handling. This is useful in cases where the method doesn't know how to recover from the exception, or it doesn’t need to handle it.
+
+printStackTrace(): This method prints detailed information about the exception to the console, including:
+
+The exception type (ClassNotFoundException in this case).
+The specific line of code where the exception occurred.
+The call stack, which shows the sequence of method calls that led to the exception.
