@@ -370,3 +370,50 @@ printStackTrace(): This method prints detailed information about the exception t
 The exception type (ClassNotFoundException in this case).
 The specific line of code where the exception occurred.
 The call stack, which shows the sequence of method calls that led to the exception.
+
+# Inputs.java
+
+This program demonstrates three common ways to read user input in Java: using System.in.read(), BufferedReader, and Scanner. Each of these methods has its own advantages and is useful in different contexts depending on your program's requirements.
+
+Code Explanation
+The Inputs class showcases three ways to handle user input in Java. Let’s go through each method step-by-step:
+
+1. Using System.in.read()
+
+int num = System.in.read();
+Explanation: This method reads a byte of data from the user input. However, System.in.read() only reads a single byte (character), and it returns the ASCII value of the character typed.
+For example, if the user enters the number 0, the method returns 48 (the ASCII value of '0').
+If the user types a larger number like 45, it will return 52 because it only reads the first character ('4').
+Limitation: You would need to handle the conversion manually and loop through the input to process multiple digits correctly. Additionally, since this method can throw an IOException, it must either be handled or declared in the method signature. 2. Using BufferedReader
+
+InputStreamReader in = new InputStreamReader(System.in);
+BufferedReader bf = new BufferedReader(in);
+Explanation: BufferedReader is a more flexible way to handle user input, especially when you need to read text data. It reads the entire line of input as a string.
+
+The BufferedReader can be used with various input sources, such as files or network streams, making it versatile.
+Limitation: After using BufferedReader, you must ensure to close the stream with bf.close() to prevent resource leaks when dealing with external resources like files or networks.
+
+Example: To parse an integer input, you would need to convert the string input into an integer manually using Integer.parseInt().
+
+3. Using Scanner
+
+Scanner sc = new Scanner(System.in);
+int num = sc.nextInt();
+System.out.println(num);
+Explanation: The Scanner class is one of the most commonly used methods for reading user input. It allows you to read various types of data (such as integers, strings, and floating-point numbers) easily.
+sc.nextInt() reads an integer input and automatically converts it to an int.
+Advantage: The Scanner class is user-friendly, as it automatically handles type conversion and is generally more convenient for simple user input handling. It is widely used for reading both text and numeric data.
+Key Points:
+System.in.read(): Reads input byte-by-byte and returns the ASCII value of the character. It’s not ideal for reading multi-digit numbers or parsing input, and it requires handling IOException.
+
+BufferedReader: Reads entire lines of input as strings. It’s a more flexible method suitable for file reading or network communication but requires manual conversion of input into the appropriate data type (e.g., Integer.parseInt() for integers).
+
+Scanner: A user-friendly and commonly used class for reading input. It supports different types of input (strings, integers, etc.) and provides methods like nextInt(), nextLine(), etc.
+
+Conclusion
+This program provides a clear overview of different methods for obtaining user input in Java, each with its strengths and limitations. Depending on your needs, you can choose the most appropriate method to handle user input in your Java applications:
+
+For simple, user-friendly input, use Scanner.
+For more advanced input handling or when dealing with external resources, BufferedReader can be a better choice.
+System.in.read() can be useful in some cases, but it requires careful handling, especially for multi-character inputs.
+By understanding these different input methods, you can decide which one suits your specific use case.
