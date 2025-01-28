@@ -417,3 +417,47 @@ For simple, user-friendly input, use Scanner.
 For more advanced input handling or when dealing with external resources, BufferedReader can be a better choice.
 System.in.read() can be useful in some cases, but it requires careful handling, especially for multi-character inputs.
 By understanding these different input methods, you can decide which one suits your specific use case.
+
+# MyThreads.java
+
+This Java program demonstrates the concepts of multithreading, race conditions, and synchronization using the Runnable interface and Thread class. It also highlights how to manage concurrency to avoid problems when multiple threads access shared resources.
+
+Overview
+The program involves multiple threads performing different tasks concurrently, with one thread modifying a shared resource (count in the Counter class). The example demonstrates how race conditions can occur when multiple threads access and modify the same resource without proper synchronization.
+
+Key Concepts:
+Runnable Interface:
+
+Threads are created by implementing the Runnable interface and defining the run() method.
+Race Condition:
+
+A race condition occurs when multiple threads access and modify a shared resource concurrently, leading to unpredictable results. In this case, the shared resource is the count variable in the Counter class.
+Synchronization:
+
+To prevent race conditions, the increment() method in the Counter class is marked as synchronized. This ensures that only one thread can modify the count variable at a time.
+Thread Management:
+
+The Thread class is used to run the Runnable objects. Threads are started using the start() method, which internally calls the run() method of the Runnable.
+Classes and Functionality
+Class A (Runnable)
+Implements Runnable interface.
+The run() method prints "hi" five times with a 10ms pause between each print using Thread.sleep(10).
+Class B (Runnable)
+Implements Runnable interface.
+The run() method prints "Hello" five times without any delays.
+Class Counter
+Contains a shared variable count that multiple threads modify.
+The increment() method is synchronized to prevent race conditions while updating the count variable.
+Main Class (MyThreads)
+In the main() method, four threads are created:
+
+obj1 (an instance of A).
+obj2 (an instance of B).
+obj3 and obj4 (both are lambda expressions that call increment() on a shared Counter object).
+The obj3 and obj4 threads increment the count variable 10 times each. Without synchronization, multiple threads might update count concurrently, leading to an inconsistent final value.
+
+The Thread class is used to execute the Runnable objects. The start() method initiates the execution of the threads.
+
+Output
+Without synchronization (synchronized keyword) in the increment() method, you may observe inconsistent results in the value of count due to race conditions.
+With synchronization, only one thread can increment count at a time, resulting in the correct final value of count.
