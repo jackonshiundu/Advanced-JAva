@@ -461,3 +461,91 @@ The Thread class is used to execute the Runnable objects. The start() method ini
 Output
 Without synchronization (synchronized keyword) in the increment() method, you may observe inconsistent results in the value of count due to race conditions.
 With synchronization, only one thread can increment count at a time, resulting in the correct final value of count.
+
+# CollectionInterface.java
+
+This project demonstrates how to use the Collection interface and its various implementations in Java. The example includes usage of List, Set, and Map collections, as well as how to iterate over them using different methods. Each of these collection types offers unique features suited for specific use cases.
+
+Overview
+List: Allows duplicates and maintains the order of elements. The example uses ArrayList to show how to store integers and access them using indexes.
+Set: Does not allow duplicates and does not guarantee any specific order. The example uses HashSet to show how it automatically removes duplicates and iterates over elements using an iterator.
+Map: Stores data in key-value pairs. The example uses HashMap to store student names as keys and their corresponding grades as values, and demonstrates updating values and printing them.
+Code Explanation
+List Example:
+
+A List<Integer> is created using ArrayList to store integers.
+Elements are added to the list using the add() method.
+The indexOf() method is used to find the index of a specific element.
+The example also shows how to use a for-each loop to iterate through the List.
+java
+Copy
+List<Integer> nums = new ArrayList<>();
+nums.add(6);
+nums.add(6);
+nums.add(7);
+nums.add(3);
+System.out.println(nums.indexOf(6)); // Output: 0
+Set Example:
+
+A Set<Integer> is created using HashSet to store integers.
+The add() method is used to insert elements, and the Set automatically removes duplicates.
+Elements are printed using an Iterator and a for-each loop.
+
+Set<Integer> nums1 = new HashSet<>();
+nums1.add(6);
+nums1.add(6);
+nums1.add(7);
+nums1.add(3);
+Iterator<Integer> values = nums1.iterator();
+while (values.hasNext()) {
+System.out.println(values.next());
+}
+Map Example:
+
+A Map<String, Integer> is created using HashMap to store student names as keys and their grades as values.
+Elements are added using the put() method. The value for an existing key can be updated using the same put() method.
+The keySet() method is used to retrieve all keys, and get() is used to access the corresponding values. The results are printed using a for-each loop.
+java
+Copy
+Map<String, Integer> students = new HashMap<>();
+students.put("Jackon", 56);
+students.put("John", 70);
+students.put("Doe", 44);
+students.put("Kevin", 80);
+students.put("Kevin", 60); // Updating Kevin's grade to 60
+System.out.println(students); // Output: {Kevin=60, John=70, Doe=44, Jackon=56}
+Key Points
+List:
+Maintains order and allows duplicates.
+Useful when the order of insertion matters or you need indexed access to elements.
+Set:
+Does not allow duplicates and does not guarantee order.
+Useful for ensuring unique elements, but order is not preserved (unless using TreeSet).
+Map:
+Stores data in key-value pairs.
+Useful for scenarios where you need to associate a value with a unique key (e.g., student grades, product catalog).
+Dependencies
+This code uses standard Java libraries and does not require external dependencies.
+
+java.util.ArrayList
+java.util.HashSet
+java.util.HashMap
+java.util.Iterator
+java.util.List
+java.util.Map
+java.util.Set
+
+Example Output
+The following output is generated when you run the program:
+
+0
+3
+6
+7
+3
+Jackon : 56
+John : 70
+Doe : 44
+Kevin : 60
+Conclusion
+This example demonstrates how to use different collection types in Java and highlights their unique features and use cases. By understanding the basic operations of List, Set, and Map, you can choose the appropriate collection for your specific problem.
