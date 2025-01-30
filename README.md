@@ -464,29 +464,28 @@ With synchronization, only one thread can increment count at a time, resulting i
 
 # CollectionInterface.java
 
-This project demonstrates how to use the Collection interface and its various implementations in Java. The example includes usage of List, Set, and Map collections, as well as how to iterate over them using different methods. Each of these collection types offers unique features suited for specific use cases.
+This project demonstrates how to use the Collection interface and its various implementations in Java, along with sorting mechanisms using Comparable and Comparator. The example includes usage of List, Set, and Map collections, as well as how to iterate over them using different methods. Each of these collection types offers unique features suited for specific use cases. Additionally, we demonstrate sorting with Comparator and Comparable to sort collections of custom objects.
 
-Overview
+Key Concepts Covered:
 List: Allows duplicates and maintains the order of elements. The example uses ArrayList to show how to store integers and access them using indexes.
 Set: Does not allow duplicates and does not guarantee any specific order. The example uses HashSet to show how it automatically removes duplicates and iterates over elements using an iterator.
 Map: Stores data in key-value pairs. The example uses HashMap to store student names as keys and their corresponding grades as values, and demonstrates updating values and printing them.
+Comparator: Demonstrates how to use a Comparator to sort objects based on custom criteria (e.g., sorting Student objects by age).
+Comparable: Demonstrates sorting objects in their natural order by implementing the Comparable interface.
 Code Explanation
-List Example:
 
-A List<Integer> is created using ArrayList to store integers.
-Elements are added to the list using the add() method.
-The indexOf() method is used to find the index of a specific element.
-The example also shows how to use a for-each loop to iterate through the List.
-java
-Copy
+1. List Example:
+   A List<Integer> is created using ArrayList to store integers.
+   Elements are added to the list using the add() method.
+   The indexOf() method is used to find the index of a specific element.
+   The example also shows how to use a for-each loop to iterate through the List.
+
 List<Integer> nums = new ArrayList<>();
 nums.add(6);
 nums.add(6);
 nums.add(7);
 nums.add(3);
-System.out.println(nums.indexOf(6)); // Output: 0
-Set Example:
-
+System.out.println(nums.indexOf(6)); // Output: 0 2. Set Example:
 A Set<Integer> is created using HashSet to store integers.
 The add() method is used to insert elements, and the Set automatically removes duplicates.
 Elements are printed using an Iterator and a for-each loop.
@@ -499,22 +498,60 @@ nums1.add(3);
 Iterator<Integer> values = nums1.iterator();
 while (values.hasNext()) {
 System.out.println(values.next());
-}
-Map Example:
-
+} 3. Map Example:
 A Map<String, Integer> is created using HashMap to store student names as keys and their grades as values.
 Elements are added using the put() method. The value for an existing key can be updated using the same put() method.
 The keySet() method is used to retrieve all keys, and get() is used to access the corresponding values. The results are printed using a for-each loop.
-java
-Copy
+
 Map<String, Integer> students = new HashMap<>();
 students.put("Jackon", 56);
 students.put("John", 70);
 students.put("Doe", 44);
 students.put("Kevin", 80);
 students.put("Kevin", 60); // Updating Kevin's grade to 60
-System.out.println(students); // Output: {Kevin=60, John=70, Doe=44, Jackon=56}
-Key Points
+System.out.println(students); // Output: {Kevin=60, John=70, Doe=44, Jackon=56} 4. Sorting with Comparator and Comparable:
+Comparable: The Student class implements Comparable<Students> to define its natural order based on age. This allows the Collections.sort() method to automatically sort a list of students by their age.
+Comparator: A custom Comparator is created to sort students based on their age as an alternative to the Comparable interface. This comparator can be passed as a parameter to the Collections.sort() method.
+Student Class (implements Comparable):
+
+class Students implements Comparable<Students> {
+int age;
+String name;
+
+    public Students(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public String toString() {
+        return "Student [age=" + age + ", name=" + name + "]";
+    }
+
+    @Override
+    public int compareTo(Students that) {
+        if (this.age > that.age)
+            return 1;
+        else
+            return -1;
+    }
+
+}
+Comparator for Sorting:
+
+Comparator<Students> studentComparator = (i, j) -> i.age > j.age ? 1 : -1;
+Sorting Example:
+
+List<Students> students = new ArrayList<>();
+students.add(new Students(16, "Jeryne"));
+students.add(new Students(18, "John"));
+students.add(new Students(31, "Navin"));
+students.add(new Students(41, "Jane"));
+students.add(new Students(24, "Mary"));
+
+Collections.sort(students); // Sorting using Comparable
+// OR use the Comparator
+Collections.sort(students, studentComparator);
+Key Points:
 List:
 Maintains order and allows duplicates.
 Useful when the order of insertion matters or you need indexed access to elements.
@@ -524,6 +561,10 @@ Useful for ensuring unique elements, but order is not preserved (unless using Tr
 Map:
 Stores data in key-value pairs.
 Useful for scenarios where you need to associate a value with a unique key (e.g., student grades, product catalog).
+Comparable:
+Defines the natural ordering of objects (in this case, sorting by age for Student objects).
+Comparator:
+Allows custom sorting of objects based on specific criteria. Can be used for multiple sorting orders.
 Dependencies
 This code uses standard Java libraries and does not require external dependencies.
 
@@ -534,12 +575,16 @@ java.util.Iterator
 java.util.List
 java.util.Map
 java.util.Set
-
+java.util.Comparator
+java.util.Collections
 Example Output
 The following output is generated when you run the program:
 
-0
-3
+Student [age=16, name=Jeryne]
+Student [age=18, name=John]
+Student [age=24, name=Mary]
+Student [age=31, name=Navin]
+Student [age=41, name=Jane]
 6
 7
 3
@@ -548,4 +593,4 @@ John : 70
 Doe : 44
 Kevin : 60
 Conclusion
-This example demonstrates how to use different collection types in Java and highlights their unique features and use cases. By understanding the basic operations of List, Set, and Map, you can choose the appropriate collection for your specific problem.
+This example demonstrates how to use different collection types in Java and highlights their unique features and use cases. By understanding the basic operations of List, Set, and Map, and utilizing sorting techniques such as Comparable and Comparator, you can choose the appropriate collection and sorting strategy for your specific problem.
