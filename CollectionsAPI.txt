@@ -1,0 +1,121 @@
+Collection API
+==========
+The Collection API in Java is a part of the Java Collections Framework, which provides a set of classes and interfaces for storing and manipulating groups of objects. It offers a unified architecture for working with collections, including operations for adding, removing, searching, and sorting data.
+
+The Collection API is part of the java.util package and consists of several interfaces and classes that represent various types of collections. The key interfaces in the Collection API are:
+
+1. Collection Interface:
+The Collection interface is the root interface in the Java Collections Framework. It defines the basic operations that all collections support (e.g., add(), remove(), size(), clear(), etc.).
+Other more specialized collections (like List, Set, and Queue) inherit from the Collection interface.
+
+public interface Collection<E> {
+    boolean add(E e);
+    boolean remove(Object o);
+    int size();
+    boolean isEmpty();
+    void clear();
+    Iterator<E> iterator();
+}
+2. List Interface:
+A List is an ordered collection (also known as a sequence). Lists allow duplicate elements and can maintain the order in which elements are inserted.
+Common Implementations:
+ArrayList: Resizable array implementation.
+LinkedList: Doubly linked list implementation.
+Example: List<String> list = new ArrayList<>();
+3. Set Interface:
+A Set is an unordered collection that does not allow duplicate elements. It is useful when you want to store unique elements.
+Common Implementations:
+HashSet: A collection backed by a hash table.
+TreeSet: A sorted set that stores elements in a natural order or according to a specified comparator.
+Example: Set<String> set = new HashSet<>();
+4. Queue Interface:
+A Queue is a collection designed for holding elements prior to processing. It typically follows a FIFO (First In, First Out) order.
+Common Implementations:
+LinkedList: Also implements Queue and can be used to create a queue.
+PriorityQueue: A queue where elements are ordered according to their natural order or a custom comparator.
+Example: Queue<Integer> queue = new LinkedList<>();
+5. Map Interface:
+A Map is not a true collection but is part of the Collections Framework. It maps keys to values, with each key being associated with exactly one value.
+Common Implementations:
+HashMap: A map backed by a hash table.
+TreeMap: A map that orders keys according to their natural order or a custom comparator.
+Example: Map<String, Integer> map = new HashMap<>();
+Key Operations in the Collection API:
+Adding Elements:
+add(E e): Adds an element to the collection (returns true if the collection changed).
+Removing Elements:
+remove(Object o): Removes a specific element from the collection (returns true if an element was removed).
+Checking Size:
+size(): Returns the number of elements in the collection.
+Searching for Elements:
+contains(Object o): Returns true if the collection contains the specified element.
+Iterating:
+iterator(): Returns an iterator over the collection, allowing you to iterate through the elements one by one.
+Clearing the Collection:
+clear(): Removes all elements from the collection.
+Example of Using Collection API:
+java
+Copy
+import java.util.*;
+
+public class CollectionExample {
+    public static void main(String[] args) {
+        // Example with List (ArrayList)
+        List<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Orange");
+        System.out.println("List: " + list);
+
+        // Example with Set (HashSet)
+        Set<String> set = new HashSet<>();
+        set.add("Apple");
+        set.add("Banana");
+        set.add("Apple"); // Duplicate entry, will not be added
+        System.out.println("Set: " + set);
+
+        // Example with Map (HashMap)
+        Map<String, Integer> map = new HashMap<>();
+        map.put("Alice", 25);
+        map.put("Bob", 30);
+        map.put("Charlie", 35);
+        System.out.println("Map: " + map);
+
+        // Example with Queue (LinkedList)
+        Queue<String> queue = new LinkedList<>();
+        queue.add("First");
+        queue.add("Second");
+        queue.add("Third");
+        System.out.println("Queue: " + queue);
+    }
+}
+Benefits of Using the Collection API:
+Unified Framework: The API provides a unified way to store and manipulate groups of objects, making it easier to work with data structures in Java.
+Pre-built Implementations: The framework provides ready-to-use, high-performance implementations like ArrayList, HashSet, and HashMap, saving you time and effort.
+Interoperability: All collection types implement standard interfaces, making it easy to interchange between them.
+Common Collection Classes:
+ArrayList:
+
+A resizable array implementation of List.
+Allows indexed access and supports dynamic resizing.
+LinkedList:
+
+A doubly-linked list implementation of List and Queue.
+Efficient for adding/removing elements from the beginning or end of the list.
+HashSet:
+
+A set implementation backed by a hash table.
+Does not allow duplicate elements and does not maintain order.
+TreeSet:
+
+A set implementation that sorts elements in their natural order (or a custom comparator).
+Does not allow duplicates.
+HashMap:
+
+A map implementation backed by a hash table.
+Stores key-value pairs and allows fast lookups based on keys.
+TreeMap:
+
+A map implementation that maintains key-value pairs in sorted order.
+Conclusion:
+The Collection API in Java is a powerful toolset for working with data. It includes various interfaces and classes for handling collections of objects, and provides functionality for adding, removing, searching, and sorting elements. Whether you need a simple list, a set with unique elements, or a map to store key-value pairs, the Collection API provides the necessary tools for efficient data manipulation.
