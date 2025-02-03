@@ -19,11 +19,13 @@ public class StreamAPI {
         Stream<Integer> s2=s1.filter(n->n%2==0);
         //in this line i am using the forEach to loop throught the strea
         Stream<Integer> s3=s2.map(n->n*2);
+        //sorted
+        Stream<Integer> s4=s3.sorted();
         //on this line we are using the reduce method from stream to add the sum  of all the values in the list.
-        int result=s3.reduce(0,(acc,curr)->acc+curr);
-        System.out.println(result);
+        //int result=s3.reduce(0,(acc,curr)->acc+curr);
+        System.out.println(s4);
         //in this line i am using the forEach to loop throught the strea
-        //s3.forEach(n->System.out.println(n));
+        s4.forEach(n->System.out.println(n));
 
 
     }

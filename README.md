@@ -594,3 +594,45 @@ Doe : 44
 Kevin : 60
 Conclusion
 This example demonstrates how to use different collection types in Java and highlights their unique features and use cases. By understanding the basic operations of List, Set, and Map, and utilizing sorting techniques such as Comparable and Comparator, you can choose the appropriate collection and sorting strategy for your specific problem.
+
+# StreamAPI.java
+
+This Java program demonstrates how to use the Stream API to process a list of integers in a functional programming style. The program showcases how to filter, map, sort, and print elements from a list using various methods provided by the Stream API.
+
+Key Features
+List Creation: A list of integers is created using Arrays.asList.
+Stream Operations:
+filter: Filters out odd numbers from the list.
+map: Multiplies each even number by 2.
+sorted: Sorts the modified list in ascending order.
+forEach: Iterates over the sorted stream and prints each element.
+Code Explanation
+List Initialization: The program starts by creating a list of integers.
+
+List<Integer> nums = Arrays.asList(3, 76, 89, 8, 47, 4);
+Stream Creation: A stream is created from the list to enable functional-style operations.
+
+Stream<Integer> s1 = nums.stream();
+Filtering Even Numbers: Using the filter method, the program filters out odd numbers.
+
+Stream<Integer> s2 = s1.filter(n -> n % 2 == 0);
+Mapping to Double the Values: The map method multiplies each even number by 2.
+
+Stream<Integer> s3 = s2.map(n -> n \* 2);
+Sorting: The resulting stream is sorted in ascending order using the sorted method.
+
+Stream<Integer> s4 = s3.sorted();
+Printing Results: Finally, the program uses forEach to print each element of the sorted stream.
+
+s4.forEach(n -> System.out.println(n));
+
+Expected Output
+When you run the program, the output will be a sorted list of even integers, each multiplied by 2:
+
+8
+16
+152
+152
+Notes
+Streams in Java are single-use. After a stream has been processed, it cannot be reused. In this example, the original list is not modified, but each operation creates a new stream.
+The program could easily be extended to include other stream operations like reduce, distinct, etc.
