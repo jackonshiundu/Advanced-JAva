@@ -1,7 +1,9 @@
 //The Stream API in Java is a feature that allows you to process sequences of elements (such as collections) in a functional style, enabling operations like filtering, mapping, and reducing in a concise and readable way.
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 public class StreamAPI {
@@ -23,10 +25,55 @@ public class StreamAPI {
         Stream<Integer> s4=s3.sorted();
         //on this line we are using the reduce method from stream to add the sum  of all the values in the list.
         //int result=s3.reduce(0,(acc,curr)->acc+curr);
-        System.out.println(s4);
         //in this line i am using the forEach to loop throught the strea
         s4.forEach(n->System.out.println(n));
 
+        //parallel Stream
+        //for you to work with it you have to have a huge number so lets create.
 
+        List <Integer> numbers=new ArrayList<Integer>(10000);
+
+        Random rand=new Random();
+
+        for (int i =1;i<=10000;i++){
+            numbers.add(rand.nextInt(100));
+        }
+        //int sum=numbers.stream().map(n->n*2).reduce(0,(c,e)->c+e);
+
+        //sequencial
+        //recording the start time for a sequencial stream  in startseq variable
+        long startseq=System.currentTimeMillis();
+        int sum=numbers.stream().map(i->{
+            try {
+                Thread.sleep(1);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+            return i*2;
+        }).mapToInt(i->i).sum();
+
+        long endSeq=System.currentTimeMillis();
+
+
+        //parallel
+        long startpara=System.currentTimeMillis();
+
+        int sum1=numbers.parallelStream().map(i-> {
+            try {
+                Thread.sleep(1);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+            return i*2;
+        }).mapToInt(i->i).sum();
+        //recording the start time for a parallel stream  in endpara variable
+        long endpara=System.currentTimeMillis();
+        //printing the summation output of the two streams
+        System.out.println(sum);
+        System.out.println(sum1);
+        //trying to compare whitch one is faster
+        System.out.println("seq ->"+(endSeq-startseq));
+        System.out.println("par ->"+(endpara-startpara));
+        //As from teh output above parallel stream takes less time so o=its always recommended when working with Big Data use paralell Streams
     }
 }

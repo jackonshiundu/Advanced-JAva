@@ -597,42 +597,83 @@ This example demonstrates how to use different collection types in Java and high
 
 # StreamAPI.java
 
-This Java program demonstrates how to use the Stream API to process a list of integers in a functional programming style. The program showcases how to filter, map, sort, and print elements from a list using various methods provided by the Stream API.
+This Java program demonstrates the use of Stream API for processing sequences of data in a functional style. The program focuses on applying various stream operations such as filtering, mapping, sorting, and reducing on a list of integers. Additionally, it compares the performance of sequential and parallel streams when processing a large dataset (10,000 random integers).
 
-Key Features
-List Creation: A list of integers is created using Arrays.asList.
+Key Concepts Demonstrated
+Stream Creation: Converting a collection (such as a list) into a stream to perform functional operations.
 Stream Operations:
-filter: Filters out odd numbers from the list.
-map: Multiplies each even number by 2.
-sorted: Sorts the modified list in ascending order.
-forEach: Iterates over the sorted stream and prints each element.
-Code Explanation
-List Initialization: The program starts by creating a list of integers.
+Filtering (e.g., selecting even numbers),
+Mapping (e.g., doubling values),
+Sorting (arranging values in ascending order),
+Reducing (e.g., summing values).
+Sequential vs Parallel Streams: Performance comparison between sequential and parallel streams using large datasets.
+Code Breakdown
 
-List<Integer> nums = Arrays.asList(3, 76, 89, 8, 47, 4);
-Stream Creation: A stream is created from the list to enable functional-style operations.
+1.  List Initialization and Stream Creation
+    The program begins by creating a list of integers, nums, which is defined as:
 
-Stream<Integer> s1 = nums.stream();
-Filtering Even Numbers: Using the filter method, the program filters out odd numbers.
+    List<Integer> nums = Arrays.asList(3, 76, 89, 8, 47, 4);
+    This list is processed using Java's Stream API, which is used to transform or filter elements in a functional way.
 
-Stream<Integer> s2 = s1.filter(n -> n % 2 == 0);
-Mapping to Double the Values: The map method multiplies each even number by 2.
+2.  Sequential Stream Operations
 
-Stream<Integer> s3 = s2.map(n -> n \* 2);
-Sorting: The resulting stream is sorted in ascending order using the sorted method.
+    The program demonstrates several stream operations on the nums list:
 
-Stream<Integer> s4 = s3.sorted();
-Printing Results: Finally, the program uses forEach to print each element of the sorted stream.
+    Filter: It filters out the even numbers using the filter() method.
 
-s4.forEach(n -> System.out.println(n));
+    Stream<Integer> s2 = s1.filter(n -> n % 2 == 0);
+    Map: The filtered elements are then doubled using the map() method.
 
-Expected Output
-When you run the program, the output will be a sorted list of even integers, each multiplied by 2:
+    Stream<Integer> s3 = s2.map(n -> n \* 2);
+    Sorted: The doubled elements are sorted in ascending order using the sorted() method.
+
+    Stream<Integer> s4 = s3.sorted();
+    ForEach: Finally, the program prints out each element of the sorted stream using the forEach() method:
+
+    s4.forEach(n -> System.out.println(n));
+
+3.  Parallel Stream Operations
+
+        To demonstrate the performance difference, the program generates a list of 10,000 random integers. This large dataset is then processed using both sequential and parallel streams.
+
+        Sequential Stream:
+        Sequential Processing: The program processes the list sequentially (one element at a time) using the stream() method.
+        The sum of the doubled values is calculated using mapToInt() and sum().
+        The time taken for this operation is recorded using System.currentTimeMillis():
+
+        long startseq = System.currentTimeMillis();
+        int sum = numbers.stream().map(i -> { Thread.sleep(1); return i \* 2; }).mapToInt(i -> i).sum();
+        long endSeq = System.currentTimeMillis();
+        Parallel Stream:
+        Parallel Processing: The same operation is performed on the list, but this time using the parallelStream() method, which processes the elements concurrently across multiple threads.
+        The time taken for this operation is similarly recorded.
+
+        long startpara = System.currentTimeMillis();
+        int sum1 = numbers.parallelStream().map(i -> { Thread.sleep(1); return i \* 2; }).mapToInt(i -> i).sum();
+        long endpara = System.currentTimeMillis(); 4. Output
+        The program prints the sum of the doubled values from both the sequential and parallel streams.
+        It also prints the time taken by each stream to process the data, allowing for a comparison of their performance:
+
+        System.out.println("seq ->" + (endSeq - startseq));
+        System.out.println("par ->" + (endpara - startpara)); 5. Conclusion and Performance Insights
+        The program compares the execution time for sequential and parallel streams. It typically demonstrates that parallel streams are faster for large datasets because they can take advantage of multiple processor cores. However, for smaller datasets, the overhead of managing parallel tasks can sometimes make sequential streams faster or just as fast.
+
+    Key Takeaways
+    Stream API enables functional-style operations on collections, improving code readability and conciseness.
+    Operations like filter(), map(), and sorted() allow for efficient processing without modifying the original collection.
+    Sequential Streams: Process data one element at a time.
+    Parallel Streams: Divide the data processing among multiple threads, offering potential performance benefits for large datasets.
+    Performance Comparison: Parallel streams are often more efficient for big data but may have overhead for smaller datasets.
+    Expected Output
+    After executing the program, the expected output would look like this (values may vary):
 
 8
 16
 152
-152
-Notes
-Streams in Java are single-use. After a stream has been processed, it cannot be reused. In this example, the original list is not modified, but each operation creates a new stream.
-The program could easily be extended to include other stream operations like reduce, distinct, etc.
+987508
+987508
+seq ->13494
+par ->3513
+(again the output varies because its a random function generated values)
+The printed numbers are the even integers from the original list, each doubled and sorted.
+The execution time for both sequential and parallel streams is printed, showing the performance difference.
