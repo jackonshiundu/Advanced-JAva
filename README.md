@@ -634,46 +634,86 @@ Code Breakdown
 
 3.  Parallel Stream Operations
 
-        To demonstrate the performance difference, the program generates a list of 10,000 random integers. This large dataset is then processed using both sequential and parallel streams.
+            To demonstrate the performance difference, the program generates a list of 10,000 random integers. This large dataset is then processed using both sequential and parallel streams.
 
-        Sequential Stream:
-        Sequential Processing: The program processes the list sequentially (one element at a time) using the stream() method.
-        The sum of the doubled values is calculated using mapToInt() and sum().
-        The time taken for this operation is recorded using System.currentTimeMillis():
+            Sequential Stream:
+            Sequential Processing: The program processes the list sequentially (one element at a time) using the stream() method.
+            The sum of the doubled values is calculated using mapToInt() and sum().
+            The time taken for this operation is recorded using System.currentTimeMillis():
 
-        long startseq = System.currentTimeMillis();
-        int sum = numbers.stream().map(i -> { Thread.sleep(1); return i \* 2; }).mapToInt(i -> i).sum();
-        long endSeq = System.currentTimeMillis();
-        Parallel Stream:
-        Parallel Processing: The same operation is performed on the list, but this time using the parallelStream() method, which processes the elements concurrently across multiple threads.
-        The time taken for this operation is similarly recorded.
+            long startseq = System.currentTimeMillis();
+            int sum = numbers.stream().map(i -> { Thread.sleep(1); return i \* 2; }).mapToInt(i -> i).sum();
+            long endSeq = System.currentTimeMillis();
+            Parallel Stream:
+            Parallel Processing: The same operation is performed on the list, but this time using the parallelStream() method, which processes the elements concurrently across multiple threads.
+            The time taken for this operation is similarly recorded.
 
-        long startpara = System.currentTimeMillis();
-        int sum1 = numbers.parallelStream().map(i -> { Thread.sleep(1); return i \* 2; }).mapToInt(i -> i).sum();
-        long endpara = System.currentTimeMillis(); 4. Output
-        The program prints the sum of the doubled values from both the sequential and parallel streams.
-        It also prints the time taken by each stream to process the data, allowing for a comparison of their performance:
+            long startpara = System.currentTimeMillis();
+            int sum1 = numbers.parallelStream().map(i -> { Thread.sleep(1); return i \* 2; }).mapToInt(i -> i).sum();
+            long endpara = System.currentTimeMillis(); 4. Output
+            The program prints the sum of the doubled values from both the sequential and parallel streams.
+            It also prints the time taken by each stream to process the data, allowing for a comparison of their performance:
 
-        System.out.println("seq ->" + (endSeq - startseq));
-        System.out.println("par ->" + (endpara - startpara)); 5. Conclusion and Performance Insights
-        The program compares the execution time for sequential and parallel streams. It typically demonstrates that parallel streams are faster for large datasets because they can take advantage of multiple processor cores. However, for smaller datasets, the overhead of managing parallel tasks can sometimes make sequential streams faster or just as fast.
+            System.out.println("seq ->" + (endSeq - startseq));
+            System.out.println("par ->" + (endpara - startpara)); 5. Conclusion and Performance Insights
+            The program compares the execution time for sequential and parallel streams. It typically demonstrates that parallel streams are faster for large datasets because they can take advantage of multiple processor cores. However, for smaller datasets, the overhead of managing parallel tasks can sometimes make sequential streams faster or just as fast.
 
-    Key Takeaways
-    Stream API enables functional-style operations on collections, improving code readability and conciseness.
-    Operations like filter(), map(), and sorted() allow for efficient processing without modifying the original collection.
-    Sequential Streams: Process data one element at a time.
-    Parallel Streams: Divide the data processing among multiple threads, offering potential performance benefits for large datasets.
-    Performance Comparison: Parallel streams are often more efficient for big data but may have overhead for smaller datasets.
+        Key Takeaways
+        Stream API enables functional-style operations on collections, improving code readability and conciseness.
+        Operations like filter(), map(), and sorted() allow for efficient processing without modifying the original collection.
+        Sequential Streams: Process data one element at a time.
+        Parallel Streams: Divide the data processing among multiple threads, offering potential performance benefits for large datasets.
+        Performance Comparison: Parallel streams are often more efficient for big data but may have overhead for smaller datasets.
+
     Expected Output
     After executing the program, the expected output would look like this (values may vary):
 
-8
-16
-152
-987508
-987508
-seq ->13494
-par ->3513
-(again the output varies because its a random function generated values)
-The printed numbers are the even integers from the original list, each doubled and sorted.
-The execution time for both sequential and parallel streams is printed, showing the performance difference.
+        8
+        16
+        152
+        987508
+        987508
+        seq ->13494
+        par ->3513
+
+    (again the output varies because its a random function generated values)
+    The printed numbers are the even integers from the original list, each doubled and sorted.
+    The execution time for both sequential and parallel streams is printed, showing the performance difference.
+
+# OptionClass.java
+
+This Java program demonstrates the usage of the Optional class, which is used to handle the presence or absence of values more gracefully. The program processes a list of names using streams, handles potential null values without causing NullPointerException, and shows how to provide default values when no match is found.
+
+Key Concepts Covered
+Optional Class: A container for values that may or may not be present, allowing safer handling of potential null values.
+findFirst() Method: A stream operation that retrieves the first element that matches a condition, returning an Optional.
+orElse() Method: Provides a fallback value if the Optional is empty (i.e., if no value was found).
+Code Walkthrough
+List Initialization The program starts by initializing a list of names:
+
+List<String> names = Arrays.asList("Jackon", "John", "Doe");
+Using Optional with findFirst() The program tries to find the first name that contains the letter "J":
+
+Optional<String> name = names.stream().filter(str -> str.contains("J")).findFirst();
+The findFirst() method returns an Optional containing the first name with a "J", or an empty Optional if no match is found.
+Handling Absence of Value with orElse() The code attempts to find a name containing the letter "X" (which doesn't exist in the list):
+
+String name1 = names.stream().filter(str -> str.contains("X")).findFirst().orElse("Not Found");
+The orElse() method ensures that if no name with "X" is found, the fallback value "Not Found" is returned.
+
+Output The program prints the first element in the list and the result of the second findFirst() operation:
+
+Jackon
+Not Found
+Explanation of Optional
+Optional<T> is used to represent a value that may or may not be present, eliminating the need for manual null checks.
+Common methods of Optional include:
+orElse(): Returns the value if present, or a default value if not.
+ifPresent(): Performs an action if the value is present.
+isPresent(): Checks if the value is present (although ifPresent() is typically preferred).
+Benefits of Using Optional
+Avoids NullPointerException: Provides a safe way to handle possible null values.
+Cleaner Code: Removes the need for explicit null checks and simplifies error handling.
+Better Readability: Expresses the intent clearly that a value may or may not be present.
+Conclusion
+This program illustrates the use of the Optional class to avoid NullPointerException and handle missing values more effectively. By leveraging stream operations with Optional, Java developers can write cleaner, more reliable code.
