@@ -717,3 +717,41 @@ Cleaner Code: Removes the need for explicit null checks and simplifies error han
 Better Readability: Expresses the intent clearly that a value may or may not be present.
 Conclusion
 This program illustrates the use of the Optional class to avoid NullPointerException and handle missing values more effectively. By leveraging stream operations with Optional, Java developers can write cleaner, more reliable code.
+
+# MethodRefrence.java
+
+This Java program demonstrates the use of method references, a shorthand syntax for calling methods. Method references are often used in conjunction with Java Streams to make the code more concise and readable. In this example, a list of names is transformed into uppercase using a method reference to the String::toUpperCase method.
+
+Key Concepts Covered
+Method Reference: A shorthand for using lambda expressions to call methods.
+Stream Operations: The program uses Java Streams to process a collection of data in a functional style.
+map() Method: Transforms each element of the stream using a function.
+Code Walkthrough
+
+1. List Initialization
+   The program starts by creating a list of strings representing names:
+
+List<String> names = Arrays.asList("John", "Jane", "June", "Mark");
+This list is then processed using the Stream API.
+
+2. Using map() with Method Reference
+   The map() method is used to transform each name in the list into its uppercase version. Instead of using a lambda expression like name -> name.toUpperCase(), a method reference is used:
+
+List<String> uNames = names.stream().map(String::toUpperCase).toList();
+Method Reference: String::toUpperCase is a method reference that refers to the toUpperCase() method of the String class.
+This allows for a more concise and readable way to apply the transformation on each string in the list. 3. Output
+The program then prints the resulting list of names in uppercase:
+
+System.out.println(uNames);
+The output will be:
+
+[JOHN, JANE, JUNE, MARK]
+Explanation of Method Reference
+Method references provide a shorthand for calling methods in a more readable way, especially when working with streams.
+The syntax for method references is ClassName::methodName, which directly references a method to be called on each element of the stream.
+Benefits of Method References
+Conciseness: Reduces boilerplate code compared to using lambda expressions.
+Readability: Makes the code easier to understand, especially when using well-known methods like toUpperCase().
+Simplified Syntax: Instead of explicitly defining a lambda, you can refer to existing methods, improving the flow and reducing verbosity.
+Conclusion
+This program demonstrates how method references can be used in conjunction with Java Streams to apply transformations on a collection of data in a concise and readable manner. In this case, the String::toUpperCase method reference is used to convert each name in the list to uppercase.
